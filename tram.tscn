@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://rx7lfp4cs48s"]
+
+[ext_resource type="Script" uid="uid://bk1t0v6olc5qk" path="res://Scripts/tram.gd" id="1_2giqf"]
+[ext_resource type="Texture2D" uid="uid://djltf51xvukwt" path="res://Art/tatra t3/back-bogie.png" id="1_bdcr0"]
+[ext_resource type="Texture2D" uid="uid://dcvt4snko5m2r" path="res://Art/tatra t3/backside.png" id="1_iwt87"]
+[ext_resource type="Texture2D" uid="uid://b4eyxy1s4wdbk" path="res://Art/tatra t3/front-bogie.png" id="2_2giqf"]
+[ext_resource type="Texture2D" uid="uid://f5se7p1edmnh" path="res://Art/tatra t3/frontside.png" id="2_47lj6"]
+
+[node name="tram" type="Node2D" unique_id=441007820 node_paths=PackedStringArray("camera_target")]
+position = Vector2(-2, -41)
+script = ExtResource("1_2giqf")
+camera_target = NodePath("Wagon/wagon front")
+bogie_pivot_distance = 300.0
+
+[node name="Backbogie" type="Node2D" parent="." unique_id=1435140762]
+position = Vector2(-235, -7)
+
+[node name="BackBogieSprite" type="Sprite2D" parent="Backbogie" unique_id=1365368822]
+position = Vector2(1, 8)
+texture = ExtResource("1_bdcr0")
+offset = Vector2(163, -150)
+
+[node name="FrontWheel" type="Marker2D" parent="Backbogie/BackBogieSprite" unique_id=103360963]
+position = Vector2(64, 39)
+
+[node name="BackPivotPoint" type="Marker2D" parent="Backbogie/BackBogieSprite" unique_id=502624168]
+position = Vector2(-1, -8)
+
+[node name="BackWheel" type="Marker2D" parent="Backbogie/BackBogieSprite" unique_id=1177671432]
+position = Vector2(-72, 38)
+
+[node name="FrontBogie" type="Node2D" parent="." unique_id=1905614132]
+position = Vector2(221, 0)
+
+[node name="FrontBogieSprite" type="Sprite2D" parent="FrontBogie" unique_id=2122756225]
+position = Vector2(0, -10)
+texture = ExtResource("2_2giqf")
+offset = Vector2(-291, -145)
+
+[node name="FrontWheel" type="Marker2D" parent="FrontBogie/FrontBogieSprite" unique_id=1982978664]
+position = Vector2(66, 52)
+
+[node name="BackWheel" type="Marker2D" parent="FrontBogie/FrontBogieSprite" unique_id=1692123327]
+position = Vector2(-72, 50)
+
+[node name="FrontPivotPoint" type="Marker2D" parent="FrontBogie/FrontBogieSprite" unique_id=342254159]
+position = Vector2(0, 11)
+
+[node name="Wagon" type="Node2D" parent="." unique_id=192215058]
+
+[node name="interior" type="Sprite2D" parent="Wagon" unique_id=1558677944]
+position = Vector2(12.406616, -10.168243)
+rotation = -0.008726646
+texture = ExtResource("1_iwt87")
+offset = Vector2(-80, -143)
+metadata/_edit_lock_ = true
+
+[node name="wagon front" type="Sprite2D" parent="Wagon" unique_id=520188683]
+position = Vector2(12.406616, -10.168243)
+rotation = -0.008726646
+texture = ExtResource("2_47lj6")
+offset = Vector2(-80, -144)
+metadata/_edit_lock_ = true
+
+[node name="FrontAttach" type="Marker2D" parent="Wagon" unique_id=875344972]
+position = Vector2(221, 1)
+
+[node name="BackAttach" type="Marker2D" parent="Wagon" unique_id=249576943]
+position = Vector2(-235, -7)
+
+[node name="FrontBogie_FrontWheel" type="PathFollow2D" parent="." unique_id=1691651041]
+position = Vector2(287, 42)
+
+[node name="FrontBogie_RearWheel" type="PathFollow2D" parent="." unique_id=2107693388]
+position = Vector2(149, 40)
+
+[node name="BackBogie_FrontWheel" type="PathFollow2D" parent="." unique_id=1918363486]
+position = Vector2(-170, 40)
+
+[node name="BackBogie_RearWheel" type="PathFollow2D" parent="." unique_id=1412655268]
+position = Vector2(-306, 39)

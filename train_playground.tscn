@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://dc1oufx5eg2o2"]
+
+[ext_resource type="PackedScene" uid="uid://rx7lfp4cs48s" path="res://Scenes/tram.tscn" id="1_mbang"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_16i5e"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_v2v6k"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_uii4u"]
+
+[sub_resource type="Curve2D" id="Curve2D_mbang"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -252, 332, -353.5127, -77.3309, 353.5127, 77.3309, 780, 701, -422.26135, 75.322296, 422.26135, -75.322296, 2230, 612, -367.4815, -9.129975, 367.4815, 9.129975, 3139, 291, -382.9308, -86.77249, 382.9308, 86.77249, 4136, 629, -433.39474, -57.682034, 433.39474, 57.682034, 5321, 727, -434.95374, -43.651268, 434.95374, 43.651268, 5842, 799, 0, 0, 0, 0, 6825, 641, -651.2222, -17.760607, 651.2222, 17.760607, 8471, 389, -1278.7637, -124.32425, 1278.7637, 124.32425, 10777, 975, -905.79095, 11.8404045, 905.79095, -11.8404045, 13785, 251, -2487.5886, -76.77743, 2487.5886, 76.77743, 16841, 941, -1550.9039, 199.6213, 1550.9039, -199.6213, 20101, 64, -1547.045, -1086.2231, 1547.045, 1086.2231, 22394, 985, -1434.0245, -609.1431, 1434.0245, 609.1431, 26644, 3528, -1326.4359, 89.92786, 1326.4359, -89.92786, 37435, 4728, 0, 0, 0, 0, 42206, 2873)
+}
+point_count = 17
+
+[sub_resource type="Resource" id="Resource_fk2j2"]
+script = ExtResource("4_uii4u")
+
+[node name="Train Playground" type="Node2D" unique_id=141711291]
+
+[node name="tram" parent="." unique_id=1618538312 node_paths=PackedStringArray("path", "camera_target", "speed_controller") instance=ExtResource("1_mbang")]
+position = Vector2(132, 138)
+path = NodePath("../Path2D2")
+camera_target = NodePath("../CamTarget")
+spawn_offset = 800.0
+bogie_pivot_distance = 460.0
+speed_controller = NodePath("../PhantomCamera2D/HSlider")
+wagon_stiffness = 90
+max_wagon_slack = 10
+
+[node name="Path2D2" type="Path2D" parent="." unique_id=703992645]
+position = Vector2(-126, -58)
+curve = SubResource("Curve2D_mbang")
+
+[node name="PhantomCamera2D" type="Node2D" parent="." unique_id=1309345751 node_paths=PackedStringArray("follow_target")]
+top_level = true
+position = Vector2(132, 138)
+script = ExtResource("3_v2v6k")
+follow_mode = 2
+follow_target = NodePath("../CamTarget")
+zoom = Vector2(0.7, 0.7)
+tween_resource = SubResource("Resource_fk2j2")
+follow_damping = true
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
+metadata/_edit_lock_ = true
+
+[node name="HSlider" type="HSlider" parent="PhantomCamera2D" unique_id=1402654756]
+offset_left = -715.0
+offset_top = -554.0
+offset_right = -5.0
+offset_bottom = -134.0
+size_flags_horizontal = 0
+min_value = -1000.0
+max_value = 1000.0
+value = 20.0
+
+[node name="CamTarget" type="Marker2D" parent="." unique_id=1878889447]
+position = Vector2(132, 138)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=96185993]
+top_level = true
+position = Vector2(132, 138)
+zoom = Vector2(0.7, 0.7)
+limit_enabled = false
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=542038427]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("2_16i5e")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
